@@ -35,24 +35,6 @@ BuildRequires:  python2-nose
 %description -n python2-%{pypi_name}
 %{summary}
 
-%package -n     python3-%{pypi_name}
-Summary:        Python unittest Utilities
-%{?python_provide:%python_provide python3-%{pypi_name}}
-
-Requires:       python3-six
-Requires:       python3-setuptools >= 0.7
-Requires:       python3-nose >= 1.3.7
-Requires:       python3-setuptools
-
-BuildRequires:  python3-devel
-BuildRequires:  python3-coverage >= 3.0
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-unittest2
-BuildRequires:  python3-nose
-
-%description -n python3-%{pypi_name}
-%{summary}
-
 %if 0%{?with_docs} > 0
 %package -n python-%{pypi_name}-doc
 Summary:        case documentation
@@ -67,7 +49,6 @@ rm -rf %{pypi_name}.egg-info
 
 %build
 %py2_build
-%py3_build
 
 %if 0%{?with_docs} > 0
 # generate html docs
@@ -77,28 +58,17 @@ rm -rf html/.{doctrees,buildinfo}
 %endif
 
 %install
-# Must do the subpackages' install first because the scripts in /usr/bin are
-# overwritten with every setup.py install.
-%py3_install
-
 %py2_install
 
 
 %check
 %{__python2} setup.py test
-%{__python3} setup.py test
 
 %files -n python2-%{pypi_name}
 %license LICENSE
 %doc docs/templates/readme.txt README.rst
 %{python2_sitelib}/%{pypi_name}
 %{python2_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
-
-%files -n python3-%{pypi_name}
-%license LICENSE
-%doc docs/templates/readme.txt README.rst
-%{python3_sitelib}/%{pypi_name}
-%{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
 
 %if 0%{?with_docs} > 0
 %files -n python-%{pypi_name}-doc
