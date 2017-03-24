@@ -30,7 +30,7 @@ Requires:       python-six
 Requires:       python-setuptools >= 0.7
 Requires:       python-nose >= 1.3.7
 Requires:       python-setuptools
-BuildRequires:  python2-unittest2
+BuildRequires:  python-unittest2
 BuildRequires:  python2-nose
 %description -n python2-%{pypi_name}
 %{summary}
